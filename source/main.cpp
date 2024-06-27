@@ -1,5 +1,5 @@
 #include <chrono>
-#include "core/GameManager.h"
+#include "core/GameManager.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
 
 int main() {
