@@ -12,10 +12,14 @@ private:
   SpriteManager* spriteManager;
   WorldManager* worldManager;
 
-  const sf::Sprite& generateBlockSprite(int, int, int) const;
+  sf::View view;
+   
+  void render(Chunk* chunk);
 public:
   RenderAgent(sf::RenderWindow* window, SpriteManager* spriteManager, WorldManager* worldManager);
   void render();
+
+  sf::View& getView();
 };
 
 #endif

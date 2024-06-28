@@ -2,8 +2,8 @@
 //#include <iostream>
 
 GameManager::GameManager() {
-  this->videoMode.width = 800;
-  this->videoMode.height = 800;
+  this->videoMode.width = 1000;
+  this->videoMode.height = 1000;
 
   window = new sf::RenderWindow(videoMode, "Pixelscape", sf::Style::Titlebar | sf::Style::Close);
   
@@ -30,6 +30,23 @@ GameManager::~GameManager() {
 
 void GameManager::update(float dt) {
   inputHandler->pollEvents();
+
+  float speed = 10.f;
+  
+  if (inputHandler->left) {
+    renderAgent->getView().move(-speed, 0);
+  }
+
+  if (inputHandler->right) {
+    renderAgent->getView().move(speed, 0);
+  }
+
+  if (inputHandler->chunkLeft) {
+    worldManager->move(-1);
+  }
+  else if (inputHandler->chunkRight) {
+    worldManager->move(1);
+  }
 
   world->Step(dt, 6, 2);
 }

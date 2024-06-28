@@ -13,6 +13,12 @@ public:
   InputHandler(sf::RenderWindow* window);
 
   void pollEvents();
+
+  bool left = false;
+  bool right = false;
+
+  bool chunkLeft = false;
+  bool chunkRight = false;
 };
 
 #endif
