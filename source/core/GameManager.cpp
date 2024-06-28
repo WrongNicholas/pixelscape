@@ -26,6 +26,8 @@ GameManager::~GameManager() {
   delete renderAgent;
   delete inputHandler;
   delete worldManager;
+
+  delete world;
 }
 
 void GameManager::update(float dt) {

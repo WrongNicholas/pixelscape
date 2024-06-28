@@ -1,3 +1,5 @@
+#include <box2d/b2_polygon_shape.h>
+#include <box2d/b2_fixture.h>
 #include "world/WorldManager.hpp"
 
 void WorldManager::initialize() {
@@ -20,8 +22,23 @@ ChunkNode* WorldManager::generate(int position, ChunkNode* left, ChunkNode* righ
   Chunk* chunk = new Chunk();
   chunk->position = position;
 
+  b2BodyDef bodyDef;
+  bodyDef.type = b2_staticBody;
+  bodyDef.position.Set(position * CHUNK_WIDTH, 0);
+  bodyDef.angle = 0;
+
+  chunk->body = world->CreateBody(&bodyDef);
+
   for (int i = 0; i < CHUNK_WIDTH * CHUNK_HEIGHT; i++) {
     chunk->blocks.push_back(1);
+    
+    b2PolygonShape shape;
+    shape.SetAsBox(BLOCK_SIZE / 2.f, BLOCK_SIZE / 2.f);
+
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &shape;
+    fixtureDef.density = 1;
+    chunk->body->CreateFixture(&fixtureDef);
   }
 
   ChunkNode* chunkNode = new ChunkNode();
