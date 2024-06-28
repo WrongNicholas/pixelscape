@@ -5,7 +5,6 @@
 #include <box2d/box2d.h>
 
 #include "core/RenderAgent.hpp"
-#include "core/SpriteManager.hpp"
 #include "core/InputHandler.hpp"
 #include "world/WorldManager.hpp"
 
@@ -16,7 +15,7 @@ private:
   sf::VideoMode videoMode;
   
   RenderAgent* renderAgent;
-  SpriteManager* spriteManager;
+  TextureManager* textureManager;
   InputHandler* inputHandler;
   WorldManager* worldManager;
   
@@ -27,7 +26,7 @@ private:
 public:
   GameManager();
   ~GameManager();
-  void update(float dt);
+  void update(float);
   void render();
 
   const bool running() const;

@@ -10,7 +10,7 @@ private:
   sf::Event event;
 
 public:
-  InputHandler(sf::RenderWindow* window);
+  InputHandler(sf::RenderWindow*);
 
   void pollEvents();
 

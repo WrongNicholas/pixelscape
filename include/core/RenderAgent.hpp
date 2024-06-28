@@ -3,20 +3,20 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
-#include "core/SpriteManager.hpp"
+#include "core/TextureManager.hpp"
 #include "world/WorldManager.hpp"
 
 class RenderAgent {
 private:
   sf::RenderWindow* window;
-  SpriteManager* spriteManager;
+  TextureManager* textureManager;
   WorldManager* worldManager;
 
   sf::View view;
    
-  void render(Chunk* chunk);
+  void render(Chunk*);
 public:
-  RenderAgent(sf::RenderWindow* window, SpriteManager* spriteManager, WorldManager* worldManager);
+  RenderAgent(sf::RenderWindow*, TextureManager*, WorldManager*);
   void render();
 
   sf::View& getView();

@@ -14,14 +14,19 @@ struct ChunkNode {
   ChunkNode* right;
 
   ~ChunkNode() {
-    if (chunk != nullptr)
+    if (chunk != nullptr) {
       delete chunk;
+      chunk = nullptr;
+    }
     
-    if (left != nullptr)
+    if (left != nullptr) {
       delete left;
-    
-    if (left != nullptr)
+      left = nullptr;
+    }
+    if (left != nullptr) {
       delete right;
+      right = nullptr;
+    }
   }
 };
 
@@ -35,15 +40,15 @@ private:
   void left();
   void right();
 
-  ChunkNode* generate(int position, ChunkNode* left, ChunkNode* right);
+  ChunkNode* generate(int, ChunkNode*, ChunkNode*);
 
 public:
-  WorldManager(b2World* world);
+  WorldManager(b2World*);
   ~WorldManager();
 
   ChunkNode* getNode();
 
-  void move(int direction);
+  void move(int);
 };
 
 #endif

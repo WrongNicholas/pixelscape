@@ -1,10 +1,11 @@
 #include "core/RenderAgent.hpp"
+#include <SFML/Graphics/Sprite.hpp>
 
 void RenderAgent::render(Chunk* chunk) {
   for (int x = 0; x < CHUNK_WIDTH; x++) {
     for (int y = 0; y < CHUNK_HEIGHT; y++) {
 
-      sf::Sprite sprite(spriteManager->get("stone"));
+      sf::Sprite sprite(textureManager->get("stone"));
       int blockX = x * BLOCK_SIZE + chunk->position * BLOCK_SIZE * CHUNK_WIDTH;
       int blockY = y * BLOCK_SIZE;
       sprite.setPosition(blockX, blockY);
@@ -13,9 +14,9 @@ void RenderAgent::render(Chunk* chunk) {
   }
 }
 
-RenderAgent::RenderAgent(sf::RenderWindow* window, SpriteManager* spriteManager, WorldManager* worldManager) {
+RenderAgent::RenderAgent(sf::RenderWindow* window, TextureManager* textureManager, WorldManager* worldManager) {
   this->window = window;
-  this->spriteManager = spriteManager;
+  this->textureManager = textureManager;
   this->worldManager = worldManager;
 
   this->window->setView(view);
