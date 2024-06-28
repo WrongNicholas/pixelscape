@@ -24,21 +24,29 @@ ChunkNode* WorldManager::generate(int position, ChunkNode* left, ChunkNode* righ
 
   b2BodyDef bodyDef;
   bodyDef.type = b2_staticBody;
-  bodyDef.position.Set(position * CHUNK_WIDTH, 0);
+  bodyDef.position.Set(position * CHUNK_WIDTH * BLOCK_SIZE, 0);
   bodyDef.angle = 0;
 
   chunk->body = world->CreateBody(&bodyDef);
 
-  for (int i = 0; i < CHUNK_WIDTH * CHUNK_HEIGHT; i++) {
-    chunk->blocks.push_back(1);
-    
-    b2PolygonShape shape;
-    shape.SetAsBox(BLOCK_SIZE / 2.f, BLOCK_SIZE / 2.f);
+  for (int x = 0; x < CHUNK_WIDTH; x++) {
+    for (int y = 0; y < CHUNK_HEIGHT; y++) {
+      chunk->blocks.push_back(1);
 
-    b2FixtureDef fixtureDef;
-    fixtureDef.shape = &shape;
-    fixtureDef.density = 1;
-    chunk->body->CreateFixture(&fixtureDef);
+      b2Vec2 points[] = {
+        b2Vec2(x * BLOCK_SIZE, y * BLOCK_SIZE),
+        b2Vec2(x * BLOCK_SIZE, (y + 1) * BLOCK_SIZE),
+        b2Vec2((x + 1) * BLOCK_SIZE, (y + 1) * BLOCK_SIZE),
+        b2Vec2((x + 1) * BLOCK_SIZE, y * BLOCK_SIZE)
+      };
+
+      b2PolygonShape shape;
+      shape.Set(points, 4);
+
+      b2FixtureDef fixtureDef;
+      fixtureDef.shape = &shape; 
+      chunk->body->CreateFixture(&fixtureDef);
+    }
   }
 
   ChunkNode* chunkNode = new ChunkNode();

@@ -11,7 +11,7 @@ GameManager::GameManager() {
 
   textureManager = new TextureManager();
 
-  world = new b2World(b2Vec2(0.f, 0.f));
+  world = new b2World(b2Vec2(0.f, 200.f));
 
   worldManager = new WorldManager(world, inputHandler, textureManager);
 

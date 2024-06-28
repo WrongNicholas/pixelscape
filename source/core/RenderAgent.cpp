@@ -18,13 +18,14 @@ RenderAgent::RenderAgent(sf::RenderWindow* window, TextureManager* textureManage
   this->window = window;
   this->textureManager = textureManager;
   this->worldManager = worldManager;
-
   this->window->setView(view);
 }
 
 void RenderAgent::render() {
   window->clear(sf::Color(20, 20, 20, 20));
-
+  
+  Player* player = worldManager->getPlayer();
+  view.setCenter(player->getSprite().getPosition());
   window->setView(view); 
 
   ChunkNode* node = worldManager->get();
@@ -32,7 +33,6 @@ void RenderAgent::render() {
   render(node->left->chunk);
   render(node->right->chunk);
 
-  Player* player = worldManager->getPlayer();
   window->draw(player->getSprite());
 
   window->display();
