@@ -5,7 +5,9 @@
 #include <box2d/box2d.h>
 
 #include "core/RenderAgent.hpp"
+#include "core/SpriteManager.hpp"
 #include "core/InputHandler.hpp"
+#include "world/WorldManager.hpp"
 
 class GameManager {
 private:
@@ -13,8 +15,10 @@ private:
   sf::RenderWindow* window;
   sf::VideoMode videoMode;
   
-  RenderAgent renderAgent;
+  RenderAgent* renderAgent;
+  SpriteManager* spriteManager;
   InputHandler* inputHandler;
+  WorldManager* worldManager;
   
   // Box2D
   b2World* world;

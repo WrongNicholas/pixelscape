@@ -3,9 +3,19 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
+#include "core/SpriteManager.hpp"
+#include "world/WorldManager.hpp"
+
 class RenderAgent {
+private:
+  sf::RenderWindow* window;
+  SpriteManager* spriteManager;
+  WorldManager* worldManager;
+
+  const sf::Sprite& generateBlockSprite(int, int, int) const;
 public:
-  void render(sf::RenderWindow* window);
+  RenderAgent(sf::RenderWindow* window, SpriteManager* spriteManager, WorldManager* worldManager);
+  void render();
 };
 
 #endif

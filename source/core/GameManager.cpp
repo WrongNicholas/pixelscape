@@ -6,14 +6,26 @@ GameManager::GameManager() {
   this->videoMode.height = 800;
 
   window = new sf::RenderWindow(videoMode, "Pixelscape", sf::Style::Titlebar | sf::Style::Close);
- 
-  inputHandler = new InputHandler(window);
+  
+  spriteManager = new SpriteManager();
+
+  spriteManager->add("stone", "resources/stone.png");
 
   world = new b2World(b2Vec2(0.f, 0.f));
+
+  worldManager = new WorldManager(world);
+
+  renderAgent = new RenderAgent(window, spriteManager, worldManager);;
+
+  inputHandler = new InputHandler(window);
 }
 
 GameManager::~GameManager() {
   delete window;
+  delete spriteManager;
+  delete renderAgent;
+  delete inputHandler;
+  delete worldManager;
 }
 
 void GameManager::update(float dt) {
@@ -23,7 +35,7 @@ void GameManager::update(float dt) {
 }
 
 void GameManager::render() {
-  renderAgent.render(window);
+  renderAgent->render();
 }
 
 const bool GameManager::running() const {
