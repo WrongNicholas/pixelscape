@@ -10,7 +10,11 @@ private:
   b2Body* body;
   sf::Sprite sprite;
 public:
-  Player(b2World*, InputHandler, sf::Texture&, float, float);
+  Player(b2World*, InputHandler*, sf::Texture&);
+
+  void update(float);
+
+  sf::Sprite& getSprite();
 };
 
 #endif

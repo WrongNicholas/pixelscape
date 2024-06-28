@@ -49,25 +49,27 @@ ChunkNode* WorldManager::generate(int position, ChunkNode* left, ChunkNode* righ
   return chunkNode;
 }
 
-WorldManager::WorldManager(b2World* world) {
+WorldManager::WorldManager(b2World* world, InputHandler* inputHandler, TextureManager* textureManager) {
   this->world = world;
 
   initialize();
+
+  player = new Player(world, inputHandler, textureManager->get("player"));
 }
 
 WorldManager::~WorldManager() {
   delete main;
+  delete player;
 }
 
-ChunkNode* WorldManager::getNode() {
+void WorldManager::update(float dt) {
+  player->update(dt);
+}
+
+ChunkNode* WorldManager::get() {
   return main;
 }
 
-void WorldManager::move(int direction) {
-  if (direction == 1) {
-    right();
-  }
-  else if (direction == -1) {
-    left();
-  }
+Player* WorldManager::getPlayer() {
+  return player;
 }

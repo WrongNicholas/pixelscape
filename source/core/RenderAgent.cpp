@@ -27,10 +27,13 @@ void RenderAgent::render() {
 
   window->setView(view); 
 
-  ChunkNode* node = worldManager->getNode();
+  ChunkNode* node = worldManager->get();
   render(node->chunk);
   render(node->left->chunk);
   render(node->right->chunk);
+
+  Player* player = worldManager->getPlayer();
+  window->draw(player->getSprite());
 
   window->display();
 }

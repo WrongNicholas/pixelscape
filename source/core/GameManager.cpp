@@ -6,20 +6,21 @@ GameManager::GameManager() {
   this->videoMode.height = 1000;
 
   window = new sf::RenderWindow(videoMode, "Pixelscape", sf::Style::Titlebar | sf::Style::Close);
-  
+
+  inputHandler = new InputHandler(window);
+
   textureManager = new TextureManager();
 
   world = new b2World(b2Vec2(0.f, 0.f));
 
-  worldManager = new WorldManager(world);
+  worldManager = new WorldManager(world, inputHandler, textureManager);
 
-  renderAgent = new RenderAgent(window, textureManager, worldManager);;
-
-  inputHandler = new InputHandler(window);
+  renderAgent = new RenderAgent(window, textureManager, worldManager);
 }
 
 GameManager::~GameManager() {
   delete window;
+  
   delete textureManager;
   delete renderAgent;
   delete inputHandler;
@@ -31,22 +32,7 @@ GameManager::~GameManager() {
 void GameManager::update(float dt) {
   inputHandler->pollEvents();
 
-  float speed = 10.f;
-  
-  if (inputHandler->left) {
-    renderAgent->getView().move(-speed, 0);
-  }
-
-  if (inputHandler->right) {
-    renderAgent->getView().move(speed, 0);
-  }
-
-  if (inputHandler->chunkLeft) {
-    worldManager->move(-1);
-  }
-  else if (inputHandler->chunkRight) {
-    worldManager->move(1);
-  }
+  worldManager->update(dt);
 
   world->Step(dt, 6, 2);
 }

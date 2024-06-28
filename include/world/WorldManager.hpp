@@ -7,6 +7,8 @@
 
 #include <box2d/b2_world.h>
 #include "world/Chunk.hpp"
+#include "world/Player.hpp"
+#include "core/TextureManager.hpp"
 
 struct ChunkNode {
   Chunk* chunk;
@@ -34,6 +36,8 @@ class WorldManager {
 private:
   b2World* world;
   ChunkNode* main;
+
+  Player* player;
   
   void initialize();
 
@@ -43,12 +47,13 @@ private:
   ChunkNode* generate(int, ChunkNode*, ChunkNode*);
 
 public:
-  WorldManager(b2World*);
+  WorldManager(b2World*, InputHandler*, TextureManager*);
   ~WorldManager();
 
-  ChunkNode* getNode();
+  void update(float);
 
-  void move(int);
+  ChunkNode* get();
+  Player* getPlayer();
 };
 
 #endif

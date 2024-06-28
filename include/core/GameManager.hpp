@@ -26,6 +26,7 @@ private:
 public:
   GameManager();
   ~GameManager();
+
   void update(float);
   void render();
 

@@ -9,6 +9,7 @@ void TextureManager::add(const std::string& name, const std::string& filepath) {
 
 TextureManager::TextureManager() {
   add("stone", "resources/stone.png");
+  add("player", "resources/player.png");
 }
 
 sf::Texture& TextureManager::get(const std::string& name) {
