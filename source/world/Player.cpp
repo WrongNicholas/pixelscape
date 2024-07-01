@@ -17,8 +17,8 @@ Player::Player(b2World* world, InputHandler* inputHandler, sf::Texture& texture)
   bodyDef.type = b2_dynamicBody;
   bodyDef.angle = 0;
   bodyDef.fixedRotation = true;
-  bodyDef.position.Set(0, -100);
-  bodyDef.gravityScale = 1000;
+  bodyDef.position.Set(0, -200);
+  bodyDef.gravityScale = 1.f;
 
   body = world->CreateBody(&bodyDef);
   
@@ -26,27 +26,29 @@ Player::Player(b2World* world, InputHandler* inputHandler, sf::Texture& texture)
   shape.SetAsBox(32.f / 2.f, 32.f / 2.f);
   
   b2FixtureDef fixtureDef;
-  fixtureDef.isSensor = false;
+  fixtureDef.density = 1.f;
+  fixtureDef.friction = 0.f;
   fixtureDef.shape = &shape;
-  fixtureDef.density = 1;
-  
+
   body->CreateFixture(&fixtureDef);  
 
   sprite = sf::Sprite(texture);
   sprite.setOrigin(16.f, 16.f);
+
+  
 }
 
 void Player::update(float dt) {
   b2Vec2 inputVector = inputHandler->getInputVector();
-  float speed = 700.f;
 
-  b2Vec2 velocity = b2Vec2(inputVector.x * speed, inputVector.y * speed);
-  body->SetLinearVelocity(velocity);
+  float speed = 500.f;
+
+  body->SetLinearVelocity(b2Vec2(inputVector.x * speed, body->GetLinearVelocity().y));
 
   sprite.setPosition(body->GetPosition().x, body->GetPosition().y);
-
-  std::cout << isGrounded() << std::endl;
 }
+
+
 
 sf::Sprite& Player::getSprite() {
   return sprite;

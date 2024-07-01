@@ -6,6 +6,7 @@ GameManager::GameManager() {
   this->videoMode.height = 1000;
 
   window = new sf::RenderWindow(videoMode, "Pixelscape", sf::Style::Titlebar | sf::Style::Close);
+  window->setFramerateLimit(60);
 
   inputHandler = new InputHandler(window);
 

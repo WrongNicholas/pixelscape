@@ -61,8 +61,5 @@ b2Vec2 InputHandler::getInputVector() {
     static_cast<float>(KEY_DOWN) - static_cast<float>(KEY_UP)
   );
 
-  float magnitude = sqrt(pow(inputVector.x, 2) + pow(inputVector.y, 2));
-  if (magnitude != 0)
-    return b2Vec2(inputVector.x / magnitude, inputVector.y / magnitude);
-  return inputVector;
+  return inputVector; 
 }
