@@ -1,0 +1,19 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-std=c++20",
+      "-I/opt/homebrew/Cellar/sfml/2.6.1/include",
+      "-I/opt/homebrew/Cellar/box2d/2.4.2/include",
+      "-I/opt/homebrew/Cellar/nlohmann-json/3.11.3/include",
+      "-Iinclude",
+      "-c",
+      "-o",
+      "build/main.o",
+      "source/main.cpp"
+    ],
+    "directory": "/Users/wojnar/Documents/pixelscape",
+    "file": "/Users/wojnar/Documents/pixelscape/source/main.cpp",
+    "output": "/Users/wojnar/Documents/pixelscape/build/main.o"
+  }
+]
