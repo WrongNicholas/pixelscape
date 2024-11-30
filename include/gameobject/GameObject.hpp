@@ -15,6 +15,7 @@ public:
 
   void update();
   void set_texture(sf::Texture&);
+  sf::Sprite& get_sprite();
 };
 
 #endif

@@ -3,7 +3,8 @@
 
 #include "box2d/box2d.h"
 #include "SFML/Graphics.hpp"
-#include "core/GameObjectFactory.hpp"
+#include "core/PrefabFactory.hpp"
+#include "core/TextureHandler.hpp"
 
 const float TIME_STEP = 1.f / 60.f;
 
@@ -13,13 +14,17 @@ private:
   sf::RenderWindow* window;
   sf::Event ev;
 
-  GameObjectFactory* factory;
+  PrefabFactory* factory;
+  TextureHandler textureHandler;
+
+  GameObject* obj;
 
 public:
   GameManager();
   ~GameManager();
 
   void update();
+  void render();
   bool running();
 };
 

@@ -18,6 +18,7 @@ int main() {
 
     while (accumulator >= TIME_STEP) {
       game.update();
+      game.render();
       accumulator -= TIME_STEP;
     }
 

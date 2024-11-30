@@ -2,10 +2,12 @@
 
 GameManager::GameManager() {
   this->window = new sf::RenderWindow(sf::VideoMode(800, 800), "Hello World", sf::Style::Titlebar | sf::Style::Close);
-  this->world = new b2World(b2Vec2(0.f, 0.f));
+  this->world = new b2World(b2Vec2(0.f, 100.f));
 
   BodyFactory* bodyFactory = new BodyFactory(this->world);
-  this->factory = new GameObjectFactory(bodyFactory); 
+  this->factory = new PrefabFactory(bodyFactory);
+
+  this->obj = factory->create(b2Vec2(0, 0), b2_dynamicBody, textureHandler.get_texture("tile"));
 }
 
 GameManager::~GameManager() {
@@ -26,6 +28,14 @@ void GameManager::update() {
         break;
     }
   }
+
+  obj->update();
+}
+
+void GameManager::render() {
+  window->clear();
+  window->draw(obj->get_sprite());
+  window->display();
 }
 
 bool GameManager::running() {
